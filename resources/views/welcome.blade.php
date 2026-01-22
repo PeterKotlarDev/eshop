@@ -6,6 +6,7 @@
     <title>iStore - Premium Reseller</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
     <style>
         body { font-family: 'Inter', sans-serif; }
     </style>
@@ -27,8 +28,13 @@
                     <a href="#" class="hover:text-black transition-colors">Watch</a>
                 </div>
 
+
+
                 <div class="flex items-center gap-4">
                     @auth
+                        <a href="/kosik" class="text-gray-600 hover:text-black transition relative p-1">
+                            <livewire:cart-counter />
+                        </a>
                         <a href="{{ url('/dashboard') }}" class="text-xs font-medium text-gray-600 hover:text-black">Môj účet</a>
                     @else
                         <a href="{{ route('login') }}" class="text-xs font-medium text-gray-600 hover:text-black">Prihlásiť sa</a>
@@ -92,6 +98,6 @@
         <p>Toto je portfólio projekt vytvorený v Laravel 11 + Tailwind CSS.</p>
         <p class="mt-2">&copy; {{ date('Y') }} iStore Clone. Design inspired by Apple.</p>
     </footer>
-
+@livewireScripts
 </body>
 </html>
