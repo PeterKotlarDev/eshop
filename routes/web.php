@@ -37,6 +37,11 @@ require __DIR__.'/auth.php';
 
 
 
+Route::get('/product/{slug}', function ($slug) {
+    $product = Product::where('slug', $slug)->firstOrFail();
+    return view('products.show', compact('product'));
+})->name('products.show');
+
 Route::get('/', function () {
     $products = Product::all();
     $categories = Category::all();

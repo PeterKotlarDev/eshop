@@ -46,51 +46,34 @@
     </nav>
 
     {{-- APPLE CATEGORY BAR --}}
-<div class="bg-white/90 backdrop-blur-md sticky top-16 z-40 border-b border-gray-100 overflow-x-auto no-scrollbar">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="flex items-center justify-between md:justify-center gap-8 md:gap-12 py-4">
-            <a href="{{ route('home') }}"
-            class="flex flex-col items-center gap-2 group min-w-[60px] transition-all">
-            <div class="w-10 h-10 flex items-center justify-center rounded-full {{ !request('category') ? 'bg-gray-200' : 'bg-gray-50' }} group-hover:scale-110 transition-transform">
-                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-            </div>
-            <span class="text-[11px] font-medium {{ !request('category') ? 'text-black font-bold' : 'text-gray-600' }}">Všetko</span>
-            @if(!request('category'))
-                <div class="h-[2px] w-full bg-blue-600 rounded-full"></div>
-            @endif
-            </a>
-            @foreach($categories as $category)
-                <a href="?category={{ $category->slug }}"
-                   class="flex flex-col items-center gap-2 group min-w-[60px] transition-all">
-
-                    {{-- Ikona - tu neskôr môžeme dať reálne SVG ikonky pre každú kategóriu --}}
-                    <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 group-hover:scale-110 transition-transform">
-                        @if($category->slug == 'iphone')
-                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
-                        @elseif($category->slug == 'mac')
-                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M7 20h10"/></svg>
-                        @elseif($category->slug == 'watch')
-                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="6" width="8" height="12" rx="2"/><path d="M10 6V3h4v3M10 18v3h4v-3"/></svg>
-                        @else
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-                        @endif
+    <div class="bg-white/90 backdrop-blur-md sticky top-16 z-40 border-b border-gray-100 w-full">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center gap-8 py-4 overflow-x-auto no-scrollbar">
+                <a href="{{ route('home') }}" class="flex flex-col items-center gap-2 group min-w-[60px] transition-all">
+                    <div class="w-10 h-10 flex items-center justify-center rounded-full {{ !request('category') ? 'bg-gray-200' : 'bg-gray-50' }} group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16m-7 6h7" /></svg>
                     </div>
-
-                    <span class="text-[11px] font-medium text-gray-600 group-hover:text-black transition-colors">
-                        {{ $category->name }}
-                    </span>
-
-                    {{-- Aktívna čiarka pod kategóriou --}}
-                    @if(request('category') == $category->slug)
-                        <div class="h-[2px] w-full bg-blue-600 rounded-full"></div>
-                    @endif
+                    <span class="text-[11px] font-medium {{ !request('category') ? 'text-black font-bold' : 'text-gray-600' }}">Všetko</span>
                 </a>
-            @endforeach
+                @foreach($categories as $category)
+                    <a href="?category={{ $category->slug }}" class="flex flex-col items-center gap-2 group min-w-[60px] transition-all">
+                        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-50 group-hover:scale-110 transition-transform">
+                            @if($category->slug == 'iphone')
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="2" width="10" height="20" rx="2"/><circle cx="12" cy="18" r="1"/></svg>
+                            @elseif($category->slug == 'mac')
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="12" rx="2"/><path d="M7 20h10"/></svg>
+                            @elseif($category->slug == 'watch')
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="6" width="8" height="12" rx="2"/><path d="M10 6V3h4v3M10 18v3h4v-3"/></svg>
+                            @else
+                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                            @endif
+                        </div>
+                        <span class="text-[11px] font-medium text-gray-600 group-hover:text-black">{{ $category->name }}</span>
+                    </a>
+                @endforeach
+            </div>
         </div>
     </div>
-</div>
 
 <style>
     /* Skryje scrollbar ale zachová funkčnosť skrolovania na mobile */
@@ -109,7 +92,7 @@
             </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main class="relative z-50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {{-- Tento riadok teraz vykreslí všetko, čo máš v product-list.blade.php --}}
         <livewire:product-list />
     </main>

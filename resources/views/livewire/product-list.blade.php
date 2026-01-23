@@ -7,11 +7,15 @@
         @forelse($products as $product)
             <div class="bg-white rounded-[24px] p-6 shadow-sm hover:shadow-md transition-all border border-gray-100 flex flex-col items-center">
                 <img src="{{ asset('images/' . $product->image) }}" class="h-48 object-contain mb-4">
-                <h2 class="text-xl font-bold">{{ $product->name }}</h2>
+                <a href="/product/{{ $product->slug }}" class="hover:underline">
+    <h2 class="text-xl font-bold">{{ $product->name }}</h2>
+</a>
                 <p class="text-gray-500 text-sm mb-4">{{ $product->description }}</p>
                 <div class="mt-auto flex justify-between items-center w-full">
                     <span class="font-bold text-lg">{{ number_format($product->price, 0, ',', ' ') }} €</span>
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm">Kúpiť</button>
+                    <button wire:click="addToCart({{ $product->id }})" class="bg-blue-600 text-white text-sm px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition-colors shadow-md shadow-blue-200 active:scale-95">
+                        Kúpiť
+                    </button>
                 </div>
             </div>
         @empty
